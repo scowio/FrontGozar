@@ -5,13 +5,13 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-export default function Generate() {
+export default function Generate({ setStep }) {
   return (
-    <div>
-      <span></span>
-      <span></span>
-      <button></button>
-      <Accordion type="single" collapsible>
+    <div className="flex flex-col items-center justify-center bg-[#181A20] text-white p-[24px] gap-4">
+      <span>Get Free Configs with Gozar Collector !</span>
+      <span>This tool can collect Telegram v2ray configs and test them by your network.</span>
+      <button onClick={() => setStep(2)}>Generate Configs</button>
+      <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="item-1">
           <AccordionTrigger>Is it accessible?</AccordionTrigger>
           <AccordionContent>
