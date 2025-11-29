@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import ProgressBar from "./progress-bar";
 
 
 export default function Progress({setStep, time}) {
@@ -25,7 +26,7 @@ export default function Progress({setStep, time}) {
                     <span>Generating...</span>
                     <span>wait a moment</span>
                 </div>
-                <div></div>
+                <ProgressBar duration={time}/>
             </div>
             <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="item-1">
