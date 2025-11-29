@@ -6,7 +6,7 @@ import Results from "./result";
 import Generate from "./generate";
 import Progress from "./progress";
 
-export default function ConfigContainer({ configs }) {
+export default function ConfigContainer() {
   const [step, setStep] = useState(1);
 
   return (
@@ -16,7 +16,7 @@ export default function ConfigContainer({ configs }) {
         <h1 className="text-[24px] font-[700]">GozarX</h1>
       </div>
       <div className="h-[2px] bg-white w-auto"></div>
-      {step === 1 ? <Generate setStep={setStep} /> : step === 2 ? <Progress setStep={setStep} time={3000} /> : <Results configs={configs} />}
+      {step === 1 ? <Generate setStep={setStep} /> : step === 2 ? <Progress setStep={setStep} time={3000} /> : <Results/>}
     </div>
   );
 }

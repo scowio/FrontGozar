@@ -1,6 +1,16 @@
 import ConfigBox from "./config-box";
+import { get_channels_data } from "@/utils/api";
 
-export default function Results({ configs }) {
+export default async function Results() {
+  const channels_with_proxies = await get_channels_data() 
+  const channels = channels_with_proxies.channels
+
+  let proxies = []
+  channels.forEach((channel) => {
+    proxies = proxies.concat(channel.proxies)
+  })
+
+  let active_proxies = proxies.filter((proxy) => proxy.ping !== null)
   return (
     <div className="flex flex-col items-center justify-center bg-[#181A20] text-white p-[24px]">
       <div className="flex flex-col items-start gap-[8px] my-[16px]">
@@ -19,7 +29,7 @@ export default function Results({ configs }) {
         </button>
       </div>
       <div className="overflow-y-scroll flex flex-col gap-[24px]">
-        {configs.map((config, index) => (
+        {active_proxies.map((config, index) => (
           <ConfigBox config={config} key={index} />
         ))}
       </div>
