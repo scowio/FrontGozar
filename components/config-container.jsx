@@ -1,9 +1,14 @@
+import Image from "next/image";
 import ConfigBox from "./config-box";
 
 export default function ConfigContainer({ configs }) {
   return (
     <div className="flex flex-col items-center justify-center bg-[#181A20] text-white p-[24px]">
-      <h1>GozarX</h1>
+      <div className="flex items-center justify-center gap-[4px]">
+        <Image src="/pics/logo.png" alt="logo" width={24} height={24} />
+        <h1 className="text-[24px] font-[700]">GozarX</h1>
+      </div>
+      
       <div className="h-[2px] bg-white w-auto"></div>
       <div className="flex flex-col items-start gap-[8px] my-[16px]">
         <span>Configs generated successfully !</span>
