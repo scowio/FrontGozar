@@ -25,7 +25,7 @@ export default async function Home() {
   
   
   return (
-    <div className="w-screen h-screen flex items-center justify-center">
+    <div className="max-h-screen overflow-y-hidden">
       <ConfigContainer configs={active_proxies} />
     </div>
   );
