@@ -14,7 +14,7 @@ export default function ConfigContainer() {
         <Image src="/pics/logo.png" alt="logo" width={24} height={24} />
         <h1 className="text-[24px] font-[700]">GozarX</h1>
       </div>
-      <div className="h-[2px] bg-white w-auto"></div>
+      <div className="h-[2px] bg-linear-to-bl from-[#335EF7] to-[#5F82FF] w-full"></div>
       {step === 1 ? <Generate setStep={setStep} /> : step === 2 ? <Progress setStep={setStep} time={3000} /> : <Results/>}
     </div>
   );
