@@ -1,32 +1,40 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-export default function ProgressBar({ duration , size = 120, stroke = 10 }) {
-    const [percent, setPercent] = useState(0)
+export default function ProgressCircle({
+  duration = 3000,
+  size = 120,
+  stroke = 10
+}) {
+  const [percent, setPercent] = useState(0)
+  const rafRef = useRef(null)
 
   useEffect(() => {
     let start = null
+    cancelAnimationFrame(rafRef.current)
 
-    const animate = ts => {
+    const step = ts => {
       if (!start) start = ts
-      const progress = ts - start
-      const current = Math.min((progress / duration) * 100, 100)
-      setPercent(current)
-
-      if (current < 100) requestAnimationFrame(animate)
+      const elapsed = ts - start
+      const p = Math.min((elapsed / duration) * 100, 100)
+      setPercent(p)
+      if (p < 100) rafRef.current = requestAnimationFrame(step)
     }
 
-    requestAnimationFrame(animate)
+    rafRef.current = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(rafRef.current)
   }, [duration])
 
-  const radius = (size - stroke) / 2
+  const half = size / 2
+  const radius = half - stroke / 2
   const circumference = 2 * Math.PI * radius
-  const offset = circumference - (percent / 100) * circumference
+  const offset = circumference * (1 - percent / 100)
 
   const getColor = p => {
-    if (p < 25) return '#ef4444' 
-    if (p < 50) return '#f59e0b' 
-    if (p < 75) return '#3b82f6' 
-    return '#10b981'       
+    if (p < 25) return '#22BB9C'
+    if (p < 50) return '#FACC15'
+    if (p < 60) return '#FB9400'
+    if (p < 75) return '#FF4D67'
+    return '#335EF7'
   }
 
   return (
@@ -34,32 +42,35 @@ export default function ProgressBar({ duration , size = 120, stroke = 10 }) {
       <svg
         width={size}
         height={size}
-        className="transform -rotate-90"
+        viewBox={`0 0 ${size} ${size}`}
+        role="img"
+        aria-label={`Progress ${Math.round(percent)} percent`}
       >
-        <circle
-          stroke="#2a2f3a"
-          fill="transparent"
-          strokeWidth={stroke}
-          r={radius}
-          cx={size / 2}
-          cy={size / 2}
-        />
-
-        <circle
-          stroke={getColor(percent)}
-          fill="transparent"
-          strokeWidth={stroke}
-          strokeLinecap="round"
-          r={radius}
-          cx={size / 2}
-          cy={size / 2}
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-          className="transition-all duration-150"
-        />
+        <g transform={`rotate(-90 ${half} ${half})`}>
+          <circle
+            cx={half}
+            cy={half}
+            r={radius}
+            stroke="#1f2937"
+            strokeWidth={stroke}
+            fill="none"
+          />
+          <circle
+            cx={half}
+            cy={half}
+            r={radius}
+            stroke={getColor(percent)}
+            strokeWidth={stroke}
+            strokeLinecap="butt"                
+            strokeDasharray={`${circumference} ${circumference}`}
+            strokeDashoffset={offset}
+            fill="none"
+            style={{ transition: 'stroke-dashoffset 120ms linear, stroke 200ms linear' }}
+          />
+        </g>
       </svg>
 
-      <span className="text-white text-xl font-semibold mt-2">
+      <span className="text-white text-xl font-semibold mt-2 select-none">
         {Math.round(percent)}%
       </span>
     </div>
