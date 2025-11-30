@@ -3,14 +3,13 @@ import { useEffect , useState } from "react";
 import ConfigBox from "./config-box";
 import { get_channels_data } from "@/utils/api";
 
-export default async function Results() {
+export default function Results() {
   const [channelsWithProxies, setChannelsWithProxies] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await get_channels_data();
       setChannelsWithProxies(data);
-      console.log(data);
     };
     fetchData();
   }, []);
