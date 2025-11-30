@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import ConfigBox from "./config-box";
 import Results from "./result";
 import Generate from "./generate";
 import Progress from "./progress";
