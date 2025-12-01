@@ -7,7 +7,7 @@ import {
 
 export default function Generate({ setStep }) {
   return (
-    <div className="flex flex-col items-center justify-center bg-[#181A20] text-white p-[24px] gap-4">
+    <div className="flex flex-col items-center justify-center bg-[#181A20] text-white mt-[16px] gap-4">
       <span>Get Free Configs with Gozar Collector !</span>
       <span>This tool can collect Telegram v2ray configs and test them by your network.</span>
       <button onClick={() => setStep(2)}>Generate Configs</button>

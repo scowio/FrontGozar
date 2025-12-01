@@ -23,12 +23,12 @@ export default function Results() {
 
   let active_proxies = proxies.filter((proxy) => proxy.ping !== null)
   return (
-    <div className="flex flex-col items-center justify-center bg-[#181A20] text-white p-[24px]">
+    <div className="flex flex-col items-baseline justify-center bg-[#181A20] text-white">
       <div className="flex flex-col items-start gap-[8px] my-[16px]">
         <span>Configs generated successfully !</span>
         <span>Quick Add only available for v2rayNG & Streisand .</span>
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4 justify-between mb-[16px] w-full">
         <button className="flex items-center justify-center bg-linear-to-bl from-[#335EF7] to-[#5F82FF] py-[11px] px-[48px] rounded-[12px]">
           Test Again
         </button>
