@@ -9,7 +9,7 @@ export default function ConfigContainer() {
   const [step, setStep] = useState(1);
 
   return (
-    <div className="flex flex-col items-center justify-center text-white p-[24px] max-w-[480px]">
+    <div className="flex flex-col items-center justify-center text-white p-[24px] max-w-[480px] gap-[16px]">
       <div className="flex items-center justify-center gap-[4px]">
         <Image src="/pics/logo.png" alt="logo" width={24} height={24} />
         <h1 className="text-[24px] font-[700]">GozarX</h1>
