@@ -40,7 +40,7 @@ export default function Results({ configs }) {
         </button>
       </div>
       <div className="overflow-y-scroll flex flex-col gap-[24px]">
-        {configs.map((config, index) => (
+        {configs && configs.map((config, index) => (
           <ConfigBox config={config} key={index} />
         ))}
       </div>
