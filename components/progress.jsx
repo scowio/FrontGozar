@@ -8,30 +8,54 @@ import {
 } from "@/components/ui/accordion";
 import ProgressBar from "./progress-bar";
 import { get_channels_data } from "@/utils/api";
+import { useMemo } from "react";
 
 export default function Progress({ setStep, time, setConfigs }) {
-  const [channelsWithProxies, setChannelsWithProxies] = useState(null);
+  const [channelsWithProxies, setChannelsWithProxies] = useState();
   useEffect(() => {
     const timer = setTimeout(() => {
-      setStep(3);
-    }, time);
-    const fetchData = async () => {
-      const data = await get_channels_data();
-      setChannelsWithProxies(data);
-    };
-    fetchData();
-    return () => clearTimeout(timer);
-  }, [setStep, time]);
+      //setStep(3)
+    }, time)
+
+    return () => clearTimeout(timer)
+  }, [time, setStep])
+
   useEffect(() => {
-    if (!channelsWithProxies) return;
+    let cancelled = false
 
-    const channels = channelsWithProxies.channels || [];
+    async function fetchData() {
+      try {
+        const data = await get_channels_data()
+        console.log('Fetched Channels Data:', data)
+        if (!cancelled) {
+          setChannelsWithProxies(data)
+        }
+      } catch (err) {
+        console.error('Error fetching channels data:', err)
+      }
+    }
 
-    const proxies = channels.flatMap((channel) => channel.proxies || []);
-    const active_proxies = proxies.filter((proxy) => proxy.ping !== null);
+    fetchData()
+    return () => {
+      cancelled = true
+    }
+  }, []) 
 
-    setConfigs(active_proxies);
-  }, [channelsWithProxies, setConfigs]);
+  const activeProxies = useMemo(() => {
+    if (!channelsWithProxies) return []
+
+    const channels = channelsWithProxies.channels || []
+    return channels
+      .flatMap(channel => channel.proxies || [])
+      .filter(proxy => proxy && proxy.ping != null)
+  }, [channelsWithProxies])
+
+  useEffect(() => {
+    if (!activeProxies.length) return
+    setConfigs(activeProxies)
+    setStep(3)
+    console.log('Active Proxies:', activeProxies)
+  }, [activeProxies, setConfigs])
   return (
     <div className="flex flex-col items-start justify-center bg-[#181A20] text-white gap-4 w-full">
       <span className="text-[18px] font-[700]">Get Free Configs with Gozar Collector!</span>

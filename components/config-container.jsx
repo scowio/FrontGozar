@@ -7,7 +7,7 @@ import Progress from "./progress";
 
 export default function ConfigContainer() {
   const [step, setStep] = useState(1);
-  const [configs, setConfigs] = useState(null);
+  const [configs, setConfigs] = useState();
   console.log("Configs:", configs);
 
   return (
@@ -20,7 +20,7 @@ export default function ConfigContainer() {
       {step === 1 ? (
         <Generate setStep={setStep} />
       ) : step === 2 ? (
-        <Progress setStep={setStep} time={3000} setConfigs={setConfigs} />
+        <Progress setStep={setStep} time={5000} setConfigs={setConfigs} />
       ) : (
         <Results configs={configs} />
       )}

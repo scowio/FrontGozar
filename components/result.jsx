@@ -39,7 +39,7 @@ export default function Results({ configs }) {
           Sorting By Test Results
         </button>
       </div>
-      <div className="overflow-y-scroll flex flex-col gap-[24px]">
+      <div className="overflow-y-scroll flex h-full flex-col gap-[24px]">
         {configs && configs.map((config, index) => (
           <ConfigBox config={config} key={index} />
         ))}
