@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Image from "next/image";
 
 export default function Generate({ setStep }) {
   return (
@@ -15,8 +16,9 @@ export default function Generate({ setStep }) {
       </span>
       <button
         onClick={() => setStep(2)}
-        className="w-full flex items-center justify-center bg-linear-to-bl from-[#335EF7] to-[#5F82FF] py-[11px] px-[48px] rounded-[12px]"
+        className="w-full flex items-center justify-center bg-linear-to-bl from-[#335EF7] to-[#5F82FF] py-[11px] px-[48px] rounded-[12px] text-[16px] font-[700] hover:bg-[linear-gradient(90deg,white,white)]  hover:text-[#335EF7] transition-colors duration-300 ease-in-out"
       >
+        <Image src="/pics/inbox-download.svg" alt="generate" width={24} height={24} className="mr-1 text"/>
         Generate Configs
       </button>
       <Accordion type="single" collapsible className="w-full">
