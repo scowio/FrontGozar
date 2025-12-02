@@ -33,20 +33,20 @@ export default function Progress({ setStep, time, setConfigs }) {
     setConfigs(active_proxies);
   }, [channelsWithProxies, setConfigs]);
   return (
-    <div>
-      <span>Get Free Configs with Gozar Collector !</span>
-      <span>
+    <div className="flex flex-col items-start justify-center bg-[#181A20] text-white gap-4 w-full">
+      <span className="text-[18px] font-[700]">Get Free Configs with Gozar Collector!</span>
+      <span className="text-[14px] text-[#E0E0E0] font-[500]">
         This tool can collect Telegram v2ray configs and test them by your
         network.
       </span>
-      <div className="flex">
+      <div className="flex items-center justify-center gap-[24px] w-full">
         <Image
           src="/pics/Group28.png"
           alt="progress"
           width={100}
           height={100}
         />
-        <div>
+        <div className="flex flex-col justify-center gap-[4px]">
           <span>Generating...</span>
           <span>wait a moment</span>
         </div>

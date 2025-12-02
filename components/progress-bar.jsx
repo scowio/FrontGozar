@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 export default function ProgressCircle({
   duration = 3000,
-  size = 120,
+  size = 80,
   stroke = 10
 }) {
   const [percent, setPercent] = useState(0)
@@ -38,7 +38,7 @@ export default function ProgressCircle({
   }
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="relative flex items-center justify-center">
       <svg
         width={size}
         height={size}
@@ -70,9 +70,10 @@ export default function ProgressCircle({
         </g>
       </svg>
 
-      <span className="text-white text-xl font-semibold mt-2 select-none">
+      <span className="absolute text-white text-xl font-semibold mt-2 select-none">
         {Math.round(percent)}%
       </span>
     </div>
   )
 }
+
