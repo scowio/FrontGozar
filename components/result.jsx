@@ -3,8 +3,8 @@ import { useEffect , useState } from "react";
 import ConfigBox from "./config-box";
 import { get_channels_data } from "@/utils/api";
 
-export default function Results() {
-  const [channelsWithProxies, setChannelsWithProxies] = useState(null);
+export default function Results({ configs }) {
+  /* const [channelsWithProxies, setChannelsWithProxies] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,7 +21,7 @@ export default function Results() {
     proxies = proxies.concat(channel.proxies)
   })
 
-  let active_proxies = proxies.filter((proxy) => proxy.ping !== null)
+  let active_proxies = proxies.filter((proxy) => proxy.ping !== null) */
   return (
     <div className="flex flex-col items-baseline justify-center bg-[#181A20] text-white">
       <div className="flex flex-col items-start gap-[8px] my-[16px]">
@@ -40,7 +40,7 @@ export default function Results() {
         </button>
       </div>
       <div className="overflow-y-scroll flex flex-col gap-[24px]">
-        {active_proxies.map((config, index) => (
+        {configs.map((config, index) => (
           <ConfigBox config={config} key={index} />
         ))}
       </div>

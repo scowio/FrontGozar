@@ -7,6 +7,8 @@ import Progress from "./progress";
 
 export default function ConfigContainer() {
   const [step, setStep] = useState(1);
+  const [configs, setConfigs] = useState(null);
+  console.log("Configs:", configs);
 
   return (
     <div className="flex flex-col items-center justify-center text-white p-[24px] max-w-[480px] gap-[16px]">
@@ -15,7 +17,13 @@ export default function ConfigContainer() {
         <h1 className="text-[24px] font-[700]">GozarX</h1>
       </div>
       <div className="h-[2px] bg-linear-to-bl from-[#335EF7] to-[#5F82FF] w-full"></div>
-      {step === 1 ? <Generate setStep={setStep} /> : step === 2 ? <Progress setStep={setStep} time={3000} /> : <Results/>}
+      {step === 1 ? (
+        <Generate setStep={setStep} />
+      ) : step === 2 ? (
+        <Progress setStep={setStep} time={3000} setConfigs={setConfigs} />
+      ) : (
+        <Results configs={configs} />
+      )}
     </div>
   );
 }
